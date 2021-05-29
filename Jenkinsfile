@@ -46,8 +46,8 @@ try{
         
         stage("Push Docker Image to Docker Registry"){
             echo "Log into the dockerhub and Pushing image"
-            withCredentials([string(credentialsId: 'dockerPwd', variable: 'dockerHubPwd')]) {
-            sh "${dockerCMD} login -u ailamadu -p ${dockerHubPwd}"
+            withCredentials([string(credentialsId: 'madhu-dockerhubPwd', variable: 'madhu-dockerhubpwd')] {
+            sh "${dockerCMD} login -u ailamadu -p ${madhu-dockerhubpwd}"
             sh "${dockerCMD} push ailamadu/casestudy:${tagName}"
             }
         }
