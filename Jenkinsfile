@@ -16,7 +16,7 @@ try{
         
         stage('git checkout'){
             echo "Checking out the code from git repository..."
-            git 'https://www.github.com/shubhamkushwah123/bootcamp10.git'
+            git 'https://github.com/shubhamkushwah123/batch10.git'
         }
         
         stage('Build, Test and Package'){
@@ -41,14 +41,14 @@ try{
         
         stage('Build Docker Image'){
             echo "Building docker image for addressbook application ..."
-            sh "${dockerCMD} build -t shubhamkushwah123/addressbook:${tagName} ."
+            sh "${dockerCMD} build -t ailamadu/casestudy:${tagName} ."
         }
         
         stage("Push Docker Image to Docker Registry"){
-            echo "Pushing image to docker hub"
+            echo "Log into the dockerhub and Pushing image"
             withCredentials([string(credentialsId: 'dockerPwd', variable: 'dockerHubPwd')]) {
-            sh "${dockerCMD} login -u shubhamkushwah123 -p ${dockerHubPwd}"
-            sh "${dockerCMD} push shubhamkushwah123/addressbook:${tagName}"
+            sh "${dockerCMD} login -u ailamadu -p ${dockerHubPwd}"
+            sh "${dockerCMD} push ailamadu/casestudy:${tagName}"
             }
         }
         
